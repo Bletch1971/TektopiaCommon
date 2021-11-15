@@ -1,2 +1,2 @@
 # TektopiaCommon
-A common repository of all Tektopia code used by my mods.
+A common repository of all common code used by my Tektopia mods.
