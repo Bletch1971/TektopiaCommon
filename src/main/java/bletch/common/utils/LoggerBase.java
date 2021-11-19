@@ -9,17 +9,17 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 
-public class LoggerBase {
+public abstract class LoggerBase {
 
-	protected static Logger modLogger;
-	protected static File debugFile;
+	protected Logger modLogger;
+	protected File debugFile;
 	
-	public static void Initialise(String modName, String debugLogFile) {
+	public void Initialise(String modName, String debugLogFile) {
 		modLogger = LogManager.getLogger(modName);
 		debugFile = new File(debugLogFile);
 	}
 	
-	public static void debug(String message) {
+	public void debug(String message) {
 		if (message == null)
 			return;
 		
@@ -27,7 +27,9 @@ public class LoggerBase {
 		writeLine("[DEBUG] " + message, true);
 	}
 	
-	public static void error(String message) {
+	public abstract void debug(String message, Boolean checkConfig);
+	
+	public void error(String message) {
 		if (message == null)
 			return;
 		
@@ -35,7 +37,7 @@ public class LoggerBase {
 		writeLine("[ERROR] " + message, true);
 	}
 	
-	public static void fatal(String message) {
+	public void fatal(String message) {
 		if (message == null)
 			return;
 		
@@ -43,7 +45,7 @@ public class LoggerBase {
 		writeLine("[FATAL] " + message, true);
 	}
 	
-	public static void info(String message) {
+	public void info(String message) {
 		if (message == null)
 			return;
 		
@@ -51,7 +53,9 @@ public class LoggerBase {
 		writeLine("[INFO] " + message, true);
 	}
 	
-	public static void trace(String message) {
+	public abstract void info(String message, Boolean checkConfig);
+	
+	public void trace(String message) {
 		if (message == null)
 			return;
 		
@@ -59,7 +63,7 @@ public class LoggerBase {
 		writeLine("[TRACE] " + message, true);
 	}
 	
-	public static void warn(String message) {
+	public void warn(String message) {
 		if (message == null)
 			return;
 		
@@ -67,15 +71,15 @@ public class LoggerBase {
 		writeLine("[WARN] " + message, true);
 	}
 	
-	public static void resetDebug() {
+	public void resetDebug() {
 		writeLines(Collections.singletonList("Debug Log:"), false);
 	}
 	
-	public static void writeLine(String line, Boolean append) {
+	public void writeLine(String line, Boolean append) {
 		writeLines(Collections.singletonList(line), append);
 	}	
 	
-	public static void writeLines(Collection<String> lines, Boolean append) {
+	public void writeLines(Collection<String> lines, Boolean append) {
 		try {
 			FileUtils.writeLines(debugFile, lines, append);
 		} 
