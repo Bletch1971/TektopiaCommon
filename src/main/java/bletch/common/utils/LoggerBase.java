@@ -23,7 +23,8 @@ public abstract class LoggerBase {
 		if (message == null)
 			return;
 		
-		modLogger.debug(message);
+		if (modLogger != null)
+			modLogger.debug(message);
 		writeLine("[DEBUG] " + message, true);
 	}
 	
@@ -33,7 +34,8 @@ public abstract class LoggerBase {
 		if (message == null)
 			return;
 		
-		modLogger.error(message);
+		if (modLogger != null)
+			modLogger.error(message);
 		writeLine("[ERROR] " + message, true);
 	}
 	
@@ -41,7 +43,8 @@ public abstract class LoggerBase {
 		if (message == null)
 			return;
 		
-		modLogger.fatal(message);
+		if (modLogger != null)
+			modLogger.fatal(message);
 		writeLine("[FATAL] " + message, true);
 	}
 	
@@ -49,7 +52,8 @@ public abstract class LoggerBase {
 		if (message == null)
 			return;
 		
-		modLogger.info(message);
+		if (modLogger != null)
+			modLogger.info(message);
 		writeLine("[INFO] " + message, true);
 	}
 	
@@ -59,7 +63,8 @@ public abstract class LoggerBase {
 		if (message == null)
 			return;
 		
-		modLogger.trace(message);
+		if (modLogger != null)
+			modLogger.trace(message);
 		writeLine("[TRACE] " + message, true);
 	}
 	
@@ -67,7 +72,8 @@ public abstract class LoggerBase {
 		if (message == null)
 			return;
 		
-		modLogger.warn(message);
+		if (modLogger != null)
+			modLogger.warn(message);
 		writeLine("[WARN] " + message, true);
 	}
 	
@@ -80,6 +86,9 @@ public abstract class LoggerBase {
 	}	
 	
 	public void writeLines(Collection<String> lines, Boolean append) {
+		if (debugFile == null)
+			return;
+		
 		try {
 			FileUtils.writeLines(debugFile, lines, append);
 		} 
