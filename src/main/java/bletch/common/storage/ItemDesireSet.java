@@ -5,10 +5,14 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import bletch.common.Interfaces.IDesireEntity;
 
 public class ItemDesireSet {
+	
+	private static final Random random = new Random();
+	
     protected List<ItemDesire> itemDesires;
     protected boolean deliveryDirty;
     protected int deliveryId;
@@ -48,7 +52,7 @@ public class ItemDesireSet {
     }
 
     public ItemDesire getNeededDesire(IDesireEntity entity) {
-        Collections.shuffle(this.itemDesires, entity.getRNG());
+        Collections.shuffle(this.itemDesires, random);
 
         for (ItemDesire desire : this.itemDesires) {
             if (desire.shouldPickUp(entity)) {
