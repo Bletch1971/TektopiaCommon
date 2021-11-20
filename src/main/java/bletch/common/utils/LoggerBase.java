@@ -11,13 +11,10 @@ import java.util.Collections;
 
 public abstract class LoggerBase {
 
-	public static LoggerBase instance;
-
-	protected static Logger modLogger;
-	protected static File debugFile;
+	protected Logger modLogger;
+	protected File debugFile;
 	
-	protected static void Initialise(LoggerBase loggerInstance, String modName, String debugLogFile) {
-		instance = loggerInstance;
+	protected void Initialise(String modName, String debugLogFile) {
 		modLogger = LogManager.getLogger(modName);
 		debugFile = new File(debugLogFile);
 	}
@@ -31,7 +28,9 @@ public abstract class LoggerBase {
 		writeLine("[DEBUG] " + message, true);
 	}
 	
-	public abstract void debug(String message, Boolean checkConfig);
+	public void debug(String message, Boolean checkConfig) {
+		debug(message);
+	}
 	
 	public void error(String message) {
 		if (message == null)
@@ -60,7 +59,9 @@ public abstract class LoggerBase {
 		writeLine("[INFO] " + message, true);
 	}
 	
-	public abstract void info(String message, Boolean checkConfig);
+	public void info(String message, Boolean checkConfig) {
+		info(message);
+	}
 	
 	public void trace(String message) {
 		if (message == null)
