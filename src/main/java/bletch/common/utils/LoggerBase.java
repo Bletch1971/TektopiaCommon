@@ -11,10 +11,13 @@ import java.util.Collections;
 
 public abstract class LoggerBase {
 
-	protected Logger modLogger;
-	protected File debugFile;
+	public static LoggerBase instance;
+
+	protected static Logger modLogger;
+	protected static File debugFile;
 	
-	public void Initialise(String modName, String debugLogFile) {
+	protected static void Initialise(LoggerBase loggerInstance, String modName, String debugLogFile) {
+		instance = loggerInstance;
 		modLogger = LogManager.getLogger(modName);
 		debugFile = new File(debugLogFile);
 	}
