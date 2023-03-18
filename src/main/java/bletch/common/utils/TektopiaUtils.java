@@ -189,7 +189,6 @@ public class TektopiaUtils {
 					return ((List<?>)fieldValue).stream()
 						.filter(v -> v instanceof EntityVillagerTek)
 						.map(v -> (EntityVillagerTek)v)
-						.distinct()
 						.sorted((c1, c2) -> (c1.getClass().getName() + "@" + c1.getLastName() + "@" + c1.getFirstName()).compareTo(c2.getClass().getName() + "@" + c2.getLastName() + "@" + c1.getFirstName()))
 						.collect(Collectors.toList());
 				}
