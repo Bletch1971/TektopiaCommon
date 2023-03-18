@@ -63,6 +63,15 @@ public abstract class LoggerBase {
 		info(message);
 	}
 	
+	public void output(String message) {
+		if (message == null)
+			return;
+		
+		if (modLogger != null)
+			modLogger.info(message);
+		writeLine(message, true);
+	}
+	
 	public void trace(String message) {
 		if (message == null)
 			return;
