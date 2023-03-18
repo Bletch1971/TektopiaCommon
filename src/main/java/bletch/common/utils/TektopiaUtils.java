@@ -41,60 +41,60 @@ public class TektopiaUtils {
 	public static List<Block> getTektopiaBlocks() {
 
 		return StreamSupport.stream(Block.REGISTRY.spliterator(), false)
-				.filter(b -> b.getRegistryName().getResourceDomain().equalsIgnoreCase(CommonDetails.MOD_ID_TEKTOPIA))
-				.distinct()
-				.sorted(Comparator.comparing(b -> b.getClass().getTypeName()))
-				.collect(Collectors.toList());
+			.filter(b -> b.getRegistryName().getResourceDomain().equalsIgnoreCase(CommonDetails.MOD_ID_TEKTOPIA))
+			.distinct()
+			.sorted(Comparator.comparing(b -> b.getClass().getTypeName()))
+			.collect(Collectors.toList());
     }
 	
 	public static List<ItemStack> getTektopiaBlockStacks() {
 
 		return StreamSupport.stream(Block.REGISTRY.spliterator(), false)
-				.filter(b -> b.getRegistryName().getResourceDomain().equalsIgnoreCase(CommonDetails.MOD_ID_TEKTOPIA))
-				.distinct()
-				.map(b -> new ItemStack(b))
-				.sorted(Comparator.comparing(s -> s.getClass().getTypeName()))
-				.collect(Collectors.toList());
+			.filter(b -> b.getRegistryName().getResourceDomain().equalsIgnoreCase(CommonDetails.MOD_ID_TEKTOPIA))
+			.distinct()
+			.map(b -> new ItemStack(b))
+			.sorted(Comparator.comparing(s -> s.getClass().getTypeName()))
+			.collect(Collectors.toList());
     }
 	
 	public static List<Class<?>> getTektopiaBlockClasses() {
 
 		return StreamSupport.stream(Block.REGISTRY.spliterator(), false)
-				.filter(b -> b.getRegistryName().getResourceDomain().equalsIgnoreCase(CommonDetails.MOD_ID_TEKTOPIA))
-				.map(b -> b.getClass())
-				.filter(c -> !c.getTypeName().equalsIgnoreCase(Block.class.getTypeName()))
-				.distinct()
-				.sorted(Comparator.comparing(Class::getTypeName))
-				.collect(Collectors.toList());
+			.filter(b -> b.getRegistryName().getResourceDomain().equalsIgnoreCase(CommonDetails.MOD_ID_TEKTOPIA))
+			.map(b -> b.getClass())
+			.filter(c -> !c.getTypeName().equalsIgnoreCase(Block.class.getTypeName()))
+			.distinct()
+			.sorted(Comparator.comparing(Class::getTypeName))
+			.collect(Collectors.toList());
     }
 	
 	public static List<Item> getTektopiaItems() {
 
 		return StreamSupport.stream(Item.REGISTRY.spliterator(), false)
-        		.filter(i -> i.getRegistryName().getResourceDomain().equalsIgnoreCase(CommonDetails.MOD_ID_TEKTOPIA))
-        		.distinct()
-        		.sorted(Comparator.comparing(i -> i.getClass().getTypeName()))
-        		.collect(Collectors.toList());
+    		.filter(i -> i.getRegistryName().getResourceDomain().equalsIgnoreCase(CommonDetails.MOD_ID_TEKTOPIA))
+    		.distinct()
+    		.sorted(Comparator.comparing(i -> i.getClass().getTypeName()))
+    		.collect(Collectors.toList());
     }
 	
 	public static List<ItemStack> getTektopiaItemStacks() {
 
 		return StreamSupport.stream(Item.REGISTRY.spliterator(), false)
-        		.filter(i -> i.getRegistryName().getResourceDomain().equalsIgnoreCase(CommonDetails.MOD_ID_TEKTOPIA))
-        		.distinct()
-        		.map(i -> new ItemStack(i))
-        		.sorted(Comparator.comparing(s -> s.getClass().getTypeName()))
-        		.collect(Collectors.toList());
+    		.filter(i -> i.getRegistryName().getResourceDomain().equalsIgnoreCase(CommonDetails.MOD_ID_TEKTOPIA))
+    		.distinct()
+    		.map(i -> new ItemStack(i))
+    		.sorted(Comparator.comparing(s -> s.getClass().getTypeName()))
+    		.collect(Collectors.toList());
     }
 	
 	public static List<Class<?>> getTektopiaItemClasses() {
 
 		return StreamSupport.stream(Item.REGISTRY.spliterator(), false)
-        		.filter(i -> i.getRegistryName().getResourceDomain().equalsIgnoreCase(CommonDetails.MOD_ID_TEKTOPIA))
-        		.distinct()
-        		.map(i -> i.getClass())
-        		.sorted(Comparator.comparing(Class::getTypeName))
-        		.collect(Collectors.toList());
+    		.filter(i -> i.getRegistryName().getResourceDomain().equalsIgnoreCase(CommonDetails.MOD_ID_TEKTOPIA))
+    		.distinct()
+    		.map(i -> i.getClass())
+    		.sorted(Comparator.comparing(Class::getTypeName))
+    		.collect(Collectors.toList());
     }   
 	
 	public static ProfessionType getProfessionType(String professionTypeName) {
@@ -123,8 +123,8 @@ public class TektopiaUtils {
 		}
 		
 		return results.stream()
-				.sorted(Comparator.naturalOrder())
-				.collect(Collectors.toList());
+			.sorted(Comparator.naturalOrder())
+			.collect(Collectors.toList());
 	}
 	
 	public static List<ProfessionType> getProfessionTypes() {
@@ -137,17 +137,17 @@ public class TektopiaUtils {
 	
 	public static List<VillageStructureType> getVillageHomeTypes() {
 		return StreamSupport.stream(Arrays.spliterator(VillageStructureType.values()), false)
-				.distinct()
-				.filter(t -> t.isHome() || t == VillageStructureType.BARRACKS)
-				.sorted(Comparator.comparing(Enum::name))
-				.collect(Collectors.toList());
+			.distinct()
+			.filter(t -> t.isHome() || t == VillageStructureType.BARRACKS)
+			.sorted(Comparator.comparing(Enum::name))
+			.collect(Collectors.toList());
 	}
 	
 	public static List<VillageStructureType> getVillageStructureTypes() {
 		return StreamSupport.stream(Arrays.spliterator(VillageStructureType.values()), false)
-				.distinct()
-				.sorted(Comparator.comparing(Enum::name))
-				.collect(Collectors.toList());
+			.distinct()
+			.sorted(Comparator.comparing(Enum::name))
+			.collect(Collectors.toList());
 	}
 	
 	public static Map<VillageStructureType, List<VillageStructure>> getVillageHomes(Village village) {
@@ -187,10 +187,11 @@ public class TektopiaUtils {
 				Object fieldValue = field.get(village);
 				if (fieldValue instanceof List<?>) {
 					return ((List<?>)fieldValue).stream()
-							.filter(v -> v instanceof EntityVillagerTek)
-							.map(v -> (EntityVillagerTek)v)
-							.sorted((c1, c2) -> (c1.getClass().getName() + "@" + c1.getLastName() + "@" + c1.getFirstName()).compareTo(c2.getClass().getName() + "@" + c2.getLastName() + "@" + c1.getFirstName()))
-							.collect(Collectors.toList());
+						.filter(v -> v instanceof EntityVillagerTek)
+						.map(v -> (EntityVillagerTek)v)
+						.distinct()
+						.sorted((c1, c2) -> (c1.getClass().getName() + "@" + c1.getLastName() + "@" + c1.getFirstName()).compareTo(c2.getClass().getName() + "@" + c2.getLastName() + "@" + c1.getFirstName()))
+						.collect(Collectors.toList());
 				}
 			}
 		}
@@ -248,9 +249,9 @@ public class TektopiaUtils {
 				Object fieldValue = field.get(structure);
 				if (fieldValue instanceof List<?>) {
 					return ((List<?>)fieldValue).stream()
-							.filter(v -> v instanceof BlockPos)
-							.map(v -> (BlockPos)v)
-							.collect(Collectors.toList());
+						.filter(v -> v instanceof BlockPos)
+						.map(v -> (BlockPos)v)
+						.collect(Collectors.toList());
 				}
 			}
 		}
@@ -289,9 +290,9 @@ public class TektopiaUtils {
 				Object fieldValue = field.get(economy);
 				if (fieldValue instanceof LinkedList<?>) {
 					return ((LinkedList<?>)fieldValue).stream()
-							.filter(v -> v instanceof ItemValue)
-							.map(iv -> ((ItemValue)iv).getItemStack())
-							.collect(Collectors.toList());
+						.filter(v -> v instanceof ItemValue)
+						.map(iv -> ((ItemValue)iv).getItemStack())
+						.collect(Collectors.toList());
 				}
 			}
 		}
@@ -330,9 +331,9 @@ public class TektopiaUtils {
 				Object fieldValue = field.get(villager);
 				if (fieldValue instanceof LinkedList<?>) {
 					return ((LinkedList<?>)fieldValue).stream()
-							.filter(v -> v instanceof Integer)
-							.map(iv -> (Integer)iv)
-							.collect(Collectors.toList());
+						.filter(v -> v instanceof Integer)
+						.map(iv -> (Integer)iv)
+						.collect(Collectors.toList());
 				}
 			}
 		}
@@ -402,10 +403,10 @@ public class TektopiaUtils {
                 Object fieldValue = field.get(villageManager);
                 if (fieldValue instanceof Set<?>) {
                     return ((Set<?>) fieldValue).stream()
-                            .filter(v -> v instanceof Village)
-                            .map(v -> (Village) v)
-                            .filter(v -> v.isValid())
-                            .collect(Collectors.toList());
+                        .filter(v -> v instanceof Village)
+                        .map(v -> (Village) v)
+                        .filter(v -> v.isValid())
+                        .collect(Collectors.toList());
                 }
             }
         } catch (Exception ex) {
